@@ -8,7 +8,9 @@ import time
 
 data_to_query = read_responses()
 # pprint(data_to_query)
+time_stamp = datetime.now().strftime("%x %X")
 data_block = []
+upload_row = []
 
 for product in data_to_query:
     url = product['Product URL']
@@ -19,7 +21,7 @@ for product in data_to_query:
     active = product['Active']
 
     desired_price = round(desired_unit_price * unit, 0)
-    time.sleep(10)
+    # time.sleep(10)
 
     if active.upper() == "Y":
         price = get_price(url)
@@ -36,7 +38,6 @@ for product in data_to_query:
                             f"Link to order: {url}"
                 
                 message_sent = True
-                time_stamp = datetime.now().strftime("%x %X") 
                 upload_row = [time_stamp, product_name, url, unit, desired_unit_price, unit_price, desired_price,
                               price, telegram_id, active, message_sent]
                 data_block.append(upload_row)
@@ -46,6 +47,9 @@ for product in data_to_query:
                 print("price has not dropped!")
         else:            
             print(price)
+            upload_row = [time_stamp, product_name, url, unit, desired_unit_price, "Unable to retrieve", desired_price,
+                              "Unable to retrieve", telegram_id, active, False]
+            data_block.append(upload_row)
 
 # print(data_block)
 update_price(data_block)
