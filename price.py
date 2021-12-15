@@ -69,7 +69,7 @@ def find_price_amazon_selenium(url):
         #price = float(driver.find_element_by_id("price_inside_buybox").text.split("₹")[1].replace(",", ""))
         # print(driver.find_element_by_id("priceblock_ourprice").text)
         price = float(driver.find_element_by_id("priceblock_ourprice").text.split("₹")[1].replace(",", ""))
-        driver.close()
+        # driver.close()
         driver.quit()
     except:
         price = "Unable to retrieve"
