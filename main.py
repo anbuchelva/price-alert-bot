@@ -1,3 +1,4 @@
+#! /usr/bin/python3
 from datetime import datetime
 from sheets import read_responses, update_price
 from price import get_price, price_dropped
