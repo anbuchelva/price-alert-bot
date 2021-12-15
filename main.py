@@ -3,6 +3,7 @@ from sheets import read_responses, update_price
 from price import get_price, price_dropped
 from telegram import send_message
 from pprint import pprint
+import time
 
 data_to_query = read_responses()
 # pprint(data_to_query)
@@ -17,10 +18,11 @@ for product in data_to_query:
     active = product['Active']
 
     desired_price = round(desired_unit_price * unit, 0)
+    time.sleep(10)
 
     if active.upper() == "Y":
         price = get_price(url)
-        if type(price) == float:            
+        if type(price) == float:
             unit_price = price/unit
             # print(unit_price)
             # print(desired_unit_price)
